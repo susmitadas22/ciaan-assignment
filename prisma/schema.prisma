@@ -24,6 +24,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  Post          Post[]
 
   @@unique([email])
   @@map("user")
@@ -72,4 +73,15 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Post {
+  id        String   @id
+  content   String
+  createdAt DateTime
+  updatedAt DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("post")
 }

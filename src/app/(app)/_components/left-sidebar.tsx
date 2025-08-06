@@ -27,7 +27,7 @@ export function LeftSidebar({ user }: { user: User | undefined }) {
       <Card>
         <div className="relative">
           {/* Cover Image */}
-          <div className="h-16 bg-gradient-to-r from-blue-400 to-blue-600 rounded-t-lg"></div>
+          <div className="h-20 -mt-6 bg-gradient-to-r from-blue-400 to-blue-600 rounded-t-sm"></div>
 
           {/* Profile Content */}
           <CardContent className="pt-0 pb-4">

@@ -3,9 +3,15 @@ import { auth } from "~/lib/auth";
 import { CreatePostForm } from "./_components/create-post-form";
 import { RightSidebar } from "./_components/right-sidebar";
 import { LeftSidebar } from "./_components/left-sidebar";
+import { prisma } from "~/lib/prisma";
+import { PostFeed } from "~/components/post-feed";
 
 export default async function Home() {
   const session = await auth.api.getSession({ headers: await headers() });
+  const posts = await prisma.post.findMany({
+    include: { user: true },
+    orderBy: { createdAt: "desc" },
+  });
   return (
     <div className="min-h-screen bg-gray-50">
       {/* <Header user={user} /> */}
@@ -20,7 +26,7 @@ export default async function Home() {
           <div className="col-span-1 lg:col-span-6">
             <div className="space-y-4">
               {session?.user && <CreatePostForm user={session?.user} />}
-              {/* <PostFeed posts={posts} /> */}
+              <PostFeed posts={posts} />
             </div>
           </div>
 
